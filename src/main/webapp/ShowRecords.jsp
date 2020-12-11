@@ -26,34 +26,47 @@
 <body>
 <div class="container">
 <h1>Show All Employees</h1>
+<a href = "index.jsp">got to home</a>
+<form action="ShowRecords.jsp">
+<label id="name">search By Name:</label>
+<input type="text" name="name" id="name"><br>
+<button type="submit" class="btn btn-primary text-center">Submit</button>
+<button type="reset" class="btn btn-primary text-center">Resat</button>
+</form>
 <table border="2px solid black" style="width: 100%">
 <thead style="border: 2px solid green">
-<th style="border: 2px solid black">Employee_Id</th><br>
-<th style="border: 2px solid black">Employee_Name</th>
-<th style="border: 2px solid black">Employee_LastName</th>
-<th style="border: 2px solid black">Employee_City</th>
-<th style="border: 2px solid black">Employee_Email</th>
-<th style="border: 2px solid black">Employee_Password</th>
-<th style="border: 2px solid black">Gender</th>
-<th style="border: 2px solid black">Update</th>
-<th style="border: 2px solid black">Delete</th>
+<th class="text-center" style="border: 2px solid black">Employee_Id</th><br>
+<th class="text-center" style="border: 2px solid black">Employee_Name</th>
+<th class="text-center" style="border: 2px solid black">Employee_LastName</th>
+<th class="text-center" style="border: 2px solid black">Employee_City</th>
+<th class="text-center" style="border: 2px solid black">Employee_Email</th>
+<th class="text-center" style="border: 2px solid black">Employee_Password</th>
+<th class="text-center" style="border: 2px solid black">Gender</th>
+<th class="text-center" style="border: 2px solid black">Update</th>
+<th class="text-center" style="border: 2px solid black">Delete</th>
 </thead>
 <tbody>
 
 <%
-List<Employee> li = EmployeeUtil.getAllEmployee();
+List<Employee> li = null;
+String name = request.getParameter("name");
+if(name!=null){
+	li = EmployeeUtil.getEmployeeBySearch(name);
+}else{
+li = EmployeeUtil.getAllEmployee();
+}
 for(Employee emp : li){
 %>
 <tr>
-<td style="border: 2px solid black"><%=emp.getEmployee_id()%></td>
-<td style="border: 2px solid black"><%=emp.getEmployee_fname()%></td>
-<td style="border: 2px solid black"><%=emp.getEmployee_lname()%></td>
-<td style="border: 2px solid black"><%=emp.getCity()%></td>
-<td style="border: 2px solid black"><%=emp.getEmail()%></td>
-<td style="border: 2px solid black"><%=emp.getPass()%></td>
-<td style="border: 2px solid black"><%=emp.getGender()%></td>
-<td style="border: 2px solid black"><a href = "update.jsp" class="btn btn-primary">Update</a></td>
-<td style="border: 2px solid black"><a href="deleteEmployee?id =<%=emp.getEmployee_id()%>" class="btn btn-primary">Delete</a></td>
+<td class="text-center" style="border: 2px solid black"><%=emp.getEmployee_id()%></td>
+<td class="text-center" style="border: 2px solid black"><%=emp.getEmployee_fname()%></td>
+<td class="text-center" style="border: 2px solid black"><%=emp.getEmployee_lname()%></td>
+<td class="text-center" style="border: 2px solid black"><%=emp.getCity()%></td>
+<td class="text-center" style="border: 2px solid black"><%=emp.getEmail()%></td>
+<td class="text-center" style="border: 2px solid black"><%=emp.getPass()%></td>
+<td class="text-center" style="border: 2px solid black"><%=emp.getGender()%></td>
+<td class="text-center" style="border: 2px solid black"><a href = "UpdateEmployeeController?id=<%=emp.getEmployee_id()%>" class="btn btn-primary">Update</a></td>
+<td class="text-center" style="border: 2px solid black"><a href="deleteEmployee?id=<%=emp.getEmployee_id()%>" class="btn btn-primary">Delete</a></td>
 </tr>
 <%
 }

@@ -22,6 +22,12 @@
   	<description></description>
   	<servlet-class>com.controller.deleteEmployee</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>UpdateEmployeeController</servlet-name>
+  	<display-name>UpdateEmployeeController</display-name>
+  	<description></description>
+  	<servlet-class>com.controller.UpdateEmployeeController</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>EmployeeSaveController</servlet-name>
   	<url-pattern>/EmployeeSaveController</url-pattern>
@@ -33,6 +39,10 @@
   <servlet-mapping>
   	<servlet-name>deleteEmployee</servlet-name>
   	<url-pattern>/deleteEmployee</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>UpdateEmployeeController</servlet-name>
+  	<url-pattern>/UpdateEmployeeController</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
   <welcome-file>index.jsp</welcome-file>

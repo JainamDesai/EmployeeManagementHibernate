@@ -35,7 +35,7 @@ public class EmployeeUtil {
 			 s = EmployeeUtil.getSessionFactory();
 			 Transaction tc = s.beginTransaction();
 			if(s!=null){
-				s.save(emp);
+				s.saveOrUpdate(emp);
 				tc.commit();
 			}
 			
@@ -90,12 +90,42 @@ public class EmployeeUtil {
 			session = EmployeeUtil.getSessionFactory();
 			Employee emp = session.get(Employee.class, id);
 			System.out.println(emp);
-		    session.delete(emp);	
+			Transaction tc = session.beginTransaction();
+		    session.delete(emp);
+		    tc.commit();
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}finally{
 			session.close();
+		}	
+	}
+	public static List<Employee> getEmployeeBySearch(String name){
+		Session session = null;
+		List<Employee> li = null;
+		try{
+			session  = EmployeeUtil.getSessionFactory();
+			Criteria cr = session.createCriteria(Employee.class);
+			cr.add(Restrictions.like("employee_fname", name+"%"));
+			li = cr.list();	
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
 		}
+		return li;	
+	}
+	public static Employee getEmployeeById(int id){
+		Session session = null;
+		Employee emp = null;
+		try{
+			session = EmployeeUtil.getSessionFactory();
+			emp = session.get(Employee.class, id);	
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return emp;
 		
 	}
 

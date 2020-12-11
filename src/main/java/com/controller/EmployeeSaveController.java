@@ -23,6 +23,7 @@ public class EmployeeSaveController extends HttpServlet {
 		try{
 			PrintWriter out = response.getWriter();
 			response.setContentType("text/html");
+			int id = Integer.parseInt(request.getParameter("id"));
 			String emp_name = request.getParameter("name");
 			String emp_lname = request.getParameter("lname");
 			String email = request.getParameter("email");
@@ -31,6 +32,7 @@ public class EmployeeSaveController extends HttpServlet {
 			String gender = request.getParameter("gender");
 			Employee emp = new Employee();
 			emp.setCity(city);
+			emp.setEmployee_id(id);
 			emp.setEmail(email);
 			emp.setEmployee_fname(emp_name);
 			emp.setEmployee_lname(emp_lname);
